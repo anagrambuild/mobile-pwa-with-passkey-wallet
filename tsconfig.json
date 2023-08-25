@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowImportingTsExtensions": true,
+    "downlevelIteration": true,
+    "target": "ES2015",
+    "lib": ["dom", "dom.iterable", "esnext", "WebWorker"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,7 +20,11 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@shared/*": ["./shared/*"]
+    },
+    "types": ["@ducanh2912/next-pwa/workbox"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

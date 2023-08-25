@@ -1,37 +1,42 @@
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import { ClerkProvider } from '@clerk/nextjs'
 
-const APP_NAME = "next-pwa example";
-const APP_DESCRIPTION = "This is an example of using next-pwa";
+import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
+
+import '../globals.css'
+
+const APP_NAME = 'PWA Wallet'
+const APP_DESCRIPTION = 'PWA Wallet Demo'
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: {
     default: APP_NAME,
-    template: "%s - PWA App",
+    template: '%s - PWA App',
   },
   description: APP_DESCRIPTION,
-  manifest: "/manifest.json",
-  themeColor: "#FFFFFF",
+  manifest: '/manifest.json',
+  themeColor: '#FFFFFF',
   appleWebApp: {
     capable: true,
-    statusBarStyle: "default",
+    statusBarStyle: 'default',
     title: APP_NAME,
   },
   formatDetection: {
     telephone: false,
   },
   icons: {
-    shortcut: "/favicon.ico",
-    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/icons/apple-touch-icon.png', sizes: '192x192' }],
   },
-};
+}
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" dir="ltr">
-      <head>
-        <style>{`
+    <ClerkProvider>
+      <html lang="en" dir="ltr">
+        <head>
+          <style>{`
             html, body, #__next {
               height: 100%;
             }
@@ -42,8 +47,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               text-align: center;
             }
             `}</style>
-      </head>
-      <body>{children}</body>
-    </html>
-  );
+        </head>
+        <body>{children}</body>
+      </html>
+    </ClerkProvider>
+  )
 }

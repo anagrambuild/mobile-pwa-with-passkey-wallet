@@ -28,7 +28,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
-
+.env
 # vercel
 .vercel
 
@@ -42,3 +42,5 @@ next-env.d.ts
 **/public/worker**
 **/public/fallback**
 **/public/precache**
+
+turnkey-api-creds.json
