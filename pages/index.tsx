@@ -183,7 +183,15 @@ export default function Index() {
   const [swSubscription, setSwSubscription] = useState<PushSubscription | null>(
     null,
   )
+  const [promptInstall, setPrompFn] = useState<{prompt: ()=>void}|null>()
   useEffect(() => {
+    window.addEventListener("beforeinstallprompt", (event: any) => {
+      event.preventDefault();
+      if ('prompt' in event) {
+        console.log('reg2', event)
+        setPrompFn(event);
+      }
+    });
     if (
       typeof window !== 'undefined' &&
       'serviceWorker' in navigator &&
@@ -301,8 +309,10 @@ export default function Index() {
           }}
           className="flex flex-1 flex-col items-center justify-center"
         >
-          <div>Mobile detected, but not PWA.</div>
-          <div>Please install PWA</div>
+          <div>Looks like you haven't installed the App. 
+            { promptInstall && <button onClick={() => promptInstall.prompt()}>Install</button>}
+            {! promptInstall && <div>Please install the PWA</div> }
+          </div>
         </Page>
       )}
 
