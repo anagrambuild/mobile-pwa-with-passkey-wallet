@@ -130,6 +130,13 @@ pnpm dev
 
 And you should be able to access your PWA at localhost:3000
 
+# Developing with mobile devices
+If your mobile device is on the same network as your development machine, you can access the development server via your local IP address. If not you can employ ngrok to create a tunnel to your local machine.
+`
+ngrok http 3000
+`
+This will allow a secure connection too which is helpful in testing service workers
+
 ## Technologies
 
 - [Next](https://nextjs.org/) 13 - Page dir and app dir both work
