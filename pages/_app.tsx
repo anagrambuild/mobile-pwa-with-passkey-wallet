@@ -5,6 +5,20 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Head from 'next/head'
 import { useState, useEffect, useLayoutEffect } from 'react'
 import '../globals.css'
+import { WagmiConfig, configureChains, createConfig, mainnet } from 'wagmi'
+import { publicProvider } from 'wagmi/providers/public'
+import { base } from 'wagmi/chains'
+
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [base],
+  [publicProvider()],
+)
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  publicClient,
+  webSocketPublicClient,
+})
 
 const queryClient = new QueryClient()
 
@@ -47,32 +61,34 @@ export default function App({ Component, pageProps }: AppProps) {
       <AppProvider theme={theme as any} safeAreas={true}>
         <ClerkProvider {...pageProps}>
           <QueryClientProvider client={queryClient}>
-            <Head>
-              <meta name="application-name" content={APP_NAME} />
-              <meta name="apple-mobile-web-app-capable" content="yes" />
-              <meta name="apple-mobile-web-app-title" content={APP_NAME} />
-              <meta name="description" content={APP_DESCRIPTION} />
-              <meta name="format-detection" content="telephone=no" />
-              <meta name="mobile-web-app-capable" content="yes" />
-              <meta name="apple-mobile-web-app-capable" content="yes" />
-              <meta
-                name="apple-mobile-web-app-status-bar-style"
-                content="black-translucent"
-              />
-              <meta name="theme-color" content="#FFFFFF" />
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
-              />
-              <link
-                rel="apple-touch-icon"
-                sizes="180x180"
-                href="/icons/apple-touch-icon.png"
-              />
-              <link rel="manifest" href="/manifest.json" />
-              <link rel="shortcut icon" href="/favicon.ico" />
-            </Head>
-            <Component {...pageProps} />
+            <WagmiConfig config={wagmiConfig}>
+              <Head>
+                <meta name="application-name" content={APP_NAME} />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-title" content={APP_NAME} />
+                <meta name="description" content={APP_DESCRIPTION} />
+                <meta name="format-detection" content="telephone=no" />
+                <meta name="mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta
+                  name="apple-mobile-web-app-status-bar-style"
+                  content="black-translucent"
+                />
+                <meta name="theme-color" content="#FFFFFF" />
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+                />
+                <link
+                  rel="apple-touch-icon"
+                  sizes="180x180"
+                  href="/icons/apple-touch-icon.png"
+                />
+                <link rel="manifest" href="/manifest.json" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+              </Head>
+              <Component {...pageProps} />
+            </WagmiConfig>
           </QueryClientProvider>
         </ClerkProvider>
       </AppProvider>

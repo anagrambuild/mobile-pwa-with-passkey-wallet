@@ -108,7 +108,7 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=YOUR_PUBLISHABLE_KEY_HERE
 CLERK_SECRET_KEY=YOUR_SECRET_KEY_HERE
 ```
 
-Enable and configure the types of web2 authentication you'd like to use within Clerk (e.g. Twitter, Discord, Phone Number, or just plain username)
+Enable and configure the types of web2 authentication you'd like to use within Clerk (e.g. Twitter, Discord, Phone Number, or just plain username). If you don't want to use Clerk, you can roll your own auth, or use something like next-auth.
 
 #### Web3 (Viem/Wagmi codegen)
 
@@ -117,6 +117,8 @@ To generate the web3 code (hooks, etc) via Wagmi CLI, run the following command:
 ```sh
 pnpm web3:codegen
 ```
+
+If you're using anything on Ethereum, be sure to add your RPC to the .env
 
 That's it, you're now set up.
 
@@ -131,10 +133,9 @@ pnpm dev
 And you should be able to access your PWA at localhost:3000
 
 # Developing with mobile devices
+
 If your mobile device is on the same network as your development machine, you can access the development server via your local IP address. If not you can employ ngrok to create a tunnel to your local machine.
-`
-ngrok http 3000
-`
+`ngrok http 3000`
 This will allow a secure connection too which is helpful in testing service workers
 
 ## Technologies
@@ -147,7 +148,3 @@ This will allow a secure connection too which is helpful in testing service work
 - [Drizzle](https://orm.drizzle.team/) - Database ORM
 - [Vercel](https://vercel.com) - Deployment
 - [Viem](#) and [Wagmi](#) - Web3 library
-
-## Credits
-
-- anagram.xyz - engineering group

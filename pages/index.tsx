@@ -26,6 +26,7 @@ import { sepolia } from 'viem/chains'
 import { WebauthnStamper } from '@turnkey/webauthn-stamper'
 import { TurnkeyClient } from '@turnkey/http'
 import axios from 'axios'
+import { useBalance } from 'wagmi'
 import { base64ToUint8Array, truncateEthAddress } from '@shared/client-utils'
 import { useInstallWebhookAndOfferUserUpgradeIfAvailable } from '../hooks/useInstallWebhookAndPromptUserUpgradeIfAvailable'
 import { useDetectRuntimeEnvironment } from '../hooks/useDetectRuntimeEnvironment'
@@ -77,6 +78,13 @@ export default function Index() {
   const isRegistered = user?.internal_id ? true : false
 
   const hasRegisteredWallet = !!user?.turnkey_suborg
+
+  const walletAddress = user?.turnkey_private_key_public_address as
+    | `0x${string}`
+    | undefined
+  const ethBalanceQuery = useBalance({
+    address: walletAddress,
+  })
 
   const isLoadingDataToDeriveUi =
     userDataQuery.isLoading || web2Auth.isLoaded === false
@@ -183,15 +191,15 @@ export default function Index() {
   const [swSubscription, setSwSubscription] = useState<PushSubscription | null>(
     null,
   )
-  const [promptInstall, setPrompFn] = useState<{prompt: ()=>void}|null>()
+  const [promptInstall, setPrompFn] = useState<{ prompt: () => void } | null>()
   useEffect(() => {
-    window.addEventListener("beforeinstallprompt", (event: any) => {
-      event.preventDefault();
+    window.addEventListener('beforeinstallprompt', (event: any) => {
+      event.preventDefault()
       if ('prompt' in event) {
         console.log('reg2', event)
-        setPrompFn(event);
+        setPrompFn(event)
       }
-    });
+    })
     if (
       typeof window !== 'undefined' &&
       'serviceWorker' in navigator &&
@@ -309,9 +317,12 @@ export default function Index() {
           }}
           className="flex flex-1 flex-col items-center justify-center"
         >
-          <div>Looks like you haven't installed the App. 
-            { promptInstall && <button onClick={() => promptInstall.prompt()}>Install</button>}
-            {! promptInstall && <div>Please install the PWA</div> }
+          <div>
+            Looks like you haven't installed the App.
+            {promptInstall && (
+              <button onClick={() => promptInstall.prompt()}>Install</button>
+            )}
+            {!promptInstall && <div>Please install the PWA</div>}
           </div>
         </Page>
       )}
@@ -449,12 +460,10 @@ export default function Index() {
           {activeTab === 'home' && (
             <>
               <BlockTitle>
-                {truncateEthAddress(
-                  user?.turnkey_private_key_public_address ?? undefined,
-                )}
+                {truncateEthAddress(walletAddress ?? undefined)}
               </BlockTitle>
               <Block>
-                <p>Balance: 0.00 ETH</p>
+                <p>Balance: {ethBalanceQuery.data?.formatted} ETH</p>
               </Block>
               <Block strong inset className="space-y-4">
                 {!user?.web_push_subscription && (
