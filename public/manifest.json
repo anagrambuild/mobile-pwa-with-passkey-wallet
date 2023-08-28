@@ -1,6 +1,6 @@
 {
-  "name": "next-pwa",
-  "short_name": "next-pwa",
+  "name": "PWA Wallet",
+  "short_name": "pwa-wallet",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#FFFFFF",

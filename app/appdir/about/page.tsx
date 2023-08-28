@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { Button } from "./Button";
+import { Button } from './Button'
 
 export default function Page() {
   return (
@@ -9,5 +9,5 @@ export default function Page() {
       <Link href="/appdir">Home page</Link>
       <Button />
     </>
-  );
+  )
 }
