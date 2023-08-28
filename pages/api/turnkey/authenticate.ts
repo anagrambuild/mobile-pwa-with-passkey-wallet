@@ -1,14 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { TSignedRequest, TurnkeyClient } from '@turnkey/http'
+import { TSignedRequest, TurnkeyApiTypes } from '@turnkey/http'
 import axios from 'axios'
-import { TActivityResponse } from '@turnkey/http/dist/shared'
-import { ApiKeyStamper } from '@turnkey/api-key-stamper'
-import { TGetWhoamiResponse } from '@turnkey/http/dist/__generated__/services/coordinator/public/v1/public_api.fetcher'
 
-type TResponse = {
-  // todo
-}
+type TGetWhoamiResponse = TurnkeyApiTypes['v1GetWhoamiResponse']
 
+/**
+ * Authenticate an existing Turnkey webauthn passkey
+ * @param req
+ * @param res
+ */
 export default async function authenticateExisting(
   req: NextApiRequest,
   res: NextApiResponse,

@@ -84,7 +84,7 @@ export default async function createUser(
           },
           {
             userName: 'onboarding-helper',
-            userEmail: 'onboarding-helper@anagram.xyz',
+            userEmail: 'onboarding-helper@pwawallet.xyz',
             authenticators: [],
             apiKeys: [
               {

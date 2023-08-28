@@ -1,7 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import webPush from 'web-push'
 
-const Notification = async (req: NextApiRequest, res: NextApiResponse) => {
+const PushWebNotificationFromSubscriptionDemoHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
   if (req.method !== 'POST') {
     return res.status(405).send('Invalid request method.')
   }
@@ -44,4 +47,4 @@ const Notification = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default Notification
+export default PushWebNotificationFromSubscriptionDemoHandler

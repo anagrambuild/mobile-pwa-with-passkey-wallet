@@ -4,7 +4,16 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import webPush from 'web-push'
 import { isNotNull } from 'drizzle-orm'
 
-const Notification = async (req: NextApiRequest, res: NextApiResponse) => {
+/**
+ * For demo only! Pushes notifications to all users in the database that have active subscriptions
+ * @param req
+ * @param res
+ * @returns
+ */
+const NotifyAllDemoHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
   if (req.method !== 'POST') {
     return res.status(405).send('Invalid request method.')
   }
@@ -48,4 +57,4 @@ const Notification = async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json({ message: 'ok' })
 }
 
-export default Notification
+export default NotifyAllDemoHandler

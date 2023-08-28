@@ -62,7 +62,7 @@ export const attestUserAndCreateSubOrg = async (args: {
   })
 
   // Proxy signed attestation request to backend to create suborg
-  const res = await axios.post('/api/tk/sub-org', {
+  const res = await axios.post('/api/turnkey/create-user', {
     subOrgName: subOrgName,
     attestation,
     challenge: base64UrlEncode(challenge),

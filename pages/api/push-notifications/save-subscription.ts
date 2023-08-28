@@ -14,6 +14,9 @@ type TResponse = {
   subscription?: any
 }
 
+/**
+ * Saves a user's WebPush subscription (https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription)
+ */
 export default async function addSubscription(
   req: NextApiRequest,
   res: NextApiResponse<TResponse>,

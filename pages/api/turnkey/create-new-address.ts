@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { TSignedRequest, TurnkeyClient } from '@turnkey/http'
 import axios from 'axios'
-import { TActivityResponse } from '@turnkey/http/dist/shared'
 import { ApiKeyStamper } from '@turnkey/api-key-stamper'
+import type { TActivityResponse } from '@turnkey/http/dist/shared'
 
 type TResponse = {
   message: string
