@@ -10,7 +10,7 @@ export const users = mysqlTable('users', {
   }).notNull(),
   // Turnkey data to identify wallet with user
   turnkey_suborg: varchar('turnkey_suborg', { length: 191 }),
-  turnkey_user_id: varchar('turnkey_suborg', { length: 191 }),
+  turnkey_user_id: varchar('turnkey_user_id', { length: 191 }),
   turnkey_private_key_id: varchar('turnkey_private_key_id', { length: 191 }),
   turnkey_private_key_public_address: varchar(
     'turnkey_private_key_public_address',
